@@ -1,2 +1,2 @@
 # Charts
-Custome Charts element in js
+Custom Charts element in js
