@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="./script.js"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="box">
+            <smt-chart type="graph"></smt-chart>
+            <script>
+                const chart = document.querySelector('smt-chart');
+                const data = [
+                    {
+                        text: 'mike',
+                        percentage: 20,
+                    },
+                    {
+                        text: 'bob',
+                        percentage: 50,
+                    },
+                    {
+                        text: 'lily',
+                        percentage: 10,
+                    },
+                ];
+                chart.importData(data);
+            </script>
+        </div>
+    </body>
+</html>

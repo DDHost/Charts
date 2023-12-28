@@ -1,0 +1,90 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.box {
+    margin: 100px auto;
+
+    width: 400px;
+    height: 300px;
+
+    background: #3468af;
+}
+
+.chart * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+smt-chart {
+    display: block;
+    box-sizing: content-box;
+
+    width: 100%;
+    height: 100%;
+
+    background: #3468af;
+}
+
+smt-chart[type='graph'] {
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+
+    padding: 1em 2em;
+}
+
+smt-chart[type='graph'] [axis] {
+    flex: 0 0 100%;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+smt-chart[type='graph'] [axis='y'] [data-axis] {
+    flex: 0 0 100%;
+    border-top: 1px solid #fff;
+}
+
+smt-chart[type='graph'] [axis='y'] [data-axis]::before {
+    content: attr(data-axis);
+    display: inline-block;
+    width: 2rem;
+    text-align: right;
+    line-height: 0;
+    position: relative;
+    left: -2.5rem;
+    top: -0.5rem;
+}
+
+smt-chart[type='graph'] [axis='x'] {
+    height: 100%;
+    width: calc(100% - 2rem);
+    position: absolute;
+    bottom: 0;
+    align-items: flex-end;
+}
+
+smt-chart[type='graph'] [axis='x'] [data-axis] {
+    display: flex;
+    flex: 1 1 0;
+    align-items: flex-end;
+    margin: 0 15px;
+}
+
+smt-chart[type='graph'] [axis='x'] [data-axis]::before {
+    content: '';
+    height: 100%;
+    width: 10px;
+    background-color: red;
+    margin-bottom: 55px;
+    text-align: center;
+}
+
+smt-chart[type='graph'] [axis='x'] [data-axis] span {
+    padding-bottom: 30px;
+}
