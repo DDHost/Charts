@@ -6,85 +6,144 @@ body {
     height: 100%;
 }
 
-.box {
-    margin: 100px auto;
+body {
+    display: grid;
+    place-items: center;
 
-    width: 400px;
-    height: 300px;
-
-    background: #3468af;
+    background-color: #f3f3f3;
 }
 
-.chart * {
+smt-chart *,
+smt-chart *::after,
+smt-chart *::before {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 smt-chart {
-    display: block;
-    box-sizing: content-box;
+    font-family: system-ui;
 
-    width: 100%;
-    height: 100%;
+    width: 35rem;
+    padding: 2em;
+    background-color: #fff;
 
-    background: #3468af;
+    box-shadow: 4px 4px 8px 2px rgba(0, 0, 0, 0.1);
+
+    border-radius: 0.5em;
 }
 
-smt-chart[type='graph'] {
-    position: relative;
-    display: flex;
-    flex-flow: row wrap;
-
-    padding: 1em 2em;
-}
-
-smt-chart[type='graph'] [axis] {
-    flex: 0 0 100%;
-    display: flex;
-    flex-flow: row wrap;
-}
-
-smt-chart[type='graph'] [axis='y'] [data-axis] {
-    flex: 0 0 100%;
-    border-top: 1px solid #fff;
-}
-
-smt-chart[type='graph'] [axis='y'] [data-axis]::before {
-    content: attr(data-axis);
-    display: inline-block;
-    width: 2rem;
-    text-align: right;
-    line-height: 0;
-    position: relative;
-    left: -2.5rem;
-    top: -0.5rem;
-}
-
-smt-chart[type='graph'] [axis='x'] {
-    height: 100%;
-    width: calc(100% - 2rem);
-    position: absolute;
-    bottom: 0;
-    align-items: flex-end;
-}
-
-smt-chart[type='graph'] [axis='x'] [data-axis] {
-    display: flex;
-    flex: 1 1 0;
-    align-items: flex-end;
-    margin: 0 15px;
-}
-
-smt-chart[type='graph'] [axis='x'] [data-axis]::before {
-    content: '';
-    height: 100%;
-    width: 10px;
-    background-color: red;
-    margin-bottom: 55px;
+/* HEADER */
+smt-chart div[header] {
+    padding: 0.25em;
     text-align: center;
 }
 
-smt-chart[type='graph'] [axis='x'] [data-axis] span {
-    padding-bottom: 30px;
+smt-chart div[header] h3 {
+    font-size: 1.5em;
+}
+
+/* ///  BODY /// */
+
+smt-chart[type='bar-chart'] div[body] {
+    display: grid;
+    grid-template-areas:
+        'axis_y main'
+        'axis_x axis_x';
+    grid-template-columns: 15px 1fr;
+    grid-template-rows: auto;
+
+    margin-block-start: 1rem;
+    margin-block-end: 1rem;
+
+    padding: 5px;
+}
+
+/* y axis */
+smt-chart[type='bar-chart'] div[body] div[axis='y'] {
+    grid-area: axis_y;
+
+    font-size: 13px;
+
+    width: 15px;
+
+    display: inline-grid;
+}
+
+smt-chart[type='bar-chart'] div[body] div[axis='y'] div[y-step] {
+    height: fit-content;
+    display: flex;
+    flex-flow: row;
+    align-items: start;
+    position: relative;
+}
+
+smt-chart[type='bar-chart'] div[body] div[axis='y'] div[y-step] span[text] {
+    position: absolute;
+    top: -10px;
+}
+
+smt-chart[type='bar-chart'] div[body] div[axis='y'] div[y-step] span[line] {
+    position: absolute;
+    display: block;
+    width: 35rem;
+    border-bottom: 1px solid #d1d1d1;
+    margin: 0 2em;
+
+    opacity: 0.4;
+    z-index: 1;
+}
+
+/* x axis */
+smt-chart[type='bar-chart'] div[body] div[axis='x'] {
+    grid-area: axis_x;
+    height: 15px;
+}
+
+/* Bars */
+smt-chart[type='bar-chart'] div[body] div[bars] {
+    grid-area: main;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1em;
+
+    width: 100%;
+    min-height: 400px;
+
+    padding: 0 1.5em;
+
+    align-items: end;
+}
+
+smt-chart[type='bar-chart'] div[body] div[bars] div[bar] {
+    height: var(--height);
+    background-color: crimson;
+    border-radius: 0.25em;
+    position: relative;
+
+    display: grid;
+    place-items: center;
+}
+smt-chart[type='bar-chart'] div[body] div[bars] div[bar]::before,
+smt-chart[type='bar-chart'] div[body] div[bars] div[bar]::after {
+    position: absolute;
+    margin-block-start: 0.25em;
+    margin-block-end: 0.25em;
+}
+smt-chart[type='bar-chart'] div[body] div[bars] div[bar]::before {
+    content: attr(data-value);
+    bottom: 100%;
+}
+
+smt-chart[type='bar-chart'] div[body] div[bars] div[bar]::after {
+    font-size: 0.8em;
+    text-align: center;
+    overflow: hidden;
+    content: attr(data-label);
+    white-space: pre;
+    top: 100%;
+    width: 100%;
+    height: fit-content;
 }
