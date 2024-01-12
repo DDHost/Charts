@@ -1,0 +1,291 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+html[lang='en'] {
+    direction: ltr;
+}
+html[lang='he'] {
+    direction: rtl;
+}
+
+body {
+    display: grid;
+    place-items: center;
+
+    background-color: #f3f3f3;
+}
+
+smt-chart *,
+smt-chart *::after,
+smt-chart *::before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Coloring */
+smt-chart {
+    --chart-color-raspberry: 341 100% 45%;
+    --chart-color-azure: 198 100% 52%;
+    --chart-color-verdigris: 180 45% 54%;
+    --chart-color-bitterLemonn: 56 100% 45%;
+    --chart-color-vividViolet: 275 92% 53%;
+    --chart-color-squash: 38 100% 50%;
+    --chart-color-magenta: 311 91% 45%;
+    --chart-color-greenTeal: 170 100% 37%;
+    --chart-color: hsl(var(--chart-color-raspberry));
+
+    --__chart-theme__light: #fff;
+    --__chart-theme__dark: #0d1117;
+}
+
+smt-chart,
+smt-chart[theme='light'] {
+    --chart-main-color: #fff;
+    --chart-second-color: #f2efef;
+    color: #000;
+    border-color: #000;
+}
+
+smt-chart[theme='dark'] {
+    --chart-main-color: #1d242e;
+    --chart-second-color: #272f3b;
+    color: #fff;
+    border-color: #c8c8c8;
+}
+
+smt-chart {
+    font-family: system-ui;
+
+    width: 35rem;
+    padding: 2em;
+    background-color: var(--chart-main-color);
+
+    box-shadow: 4px 4px 8px 2px rgba(0, 0, 0, 0.1);
+
+    border-radius: 0.5em;
+}
+
+/* scrollbar */
+
+smt-chart {
+    overflow-y: hidden;
+}
+
+smt-chart::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+smt-chart::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 20px;
+}
+
+smt-chart::-webkit-scrollbar-track {
+    background: #ddd;
+    border-radius: 20px;
+}
+
+/* hide scroll bar when not hover */
+smt-chart:not(:hover)::-webkit-scrollbar-thumb,
+smt-chart:not(:hover)::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* tooltip */
+smt-chart *:hover > [tooltip] {
+    visibility: visible;
+}
+smt-chart [tooltip] {
+    visibility: hidden;
+
+    /* Position the tooltip */
+    position: relative;
+
+    font-size: 14px;
+    left: 0.7em;
+}
+
+smt-chart [tooltip]::before {
+    content: attr(data-tooltip-text);
+    white-space: pre-wrap;
+    position: absolute;
+
+    background-color: var(--chart-main-color);
+
+    width: 140px;
+    border-radius: 0 0 6px 6px;
+    z-index: 10;
+    padding: 5px;
+
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+}
+
+smt-chart [tooltip]::after {
+    content: attr(data-tooltip-title);
+    z-index: 10;
+    position: absolute;
+
+    background-color: var(--chart-second-color);
+
+    text-align: center;
+
+    width: 140px;
+    height: fit-content;
+    line-height: 22px;
+
+    border-radius: 6px 6px 0 0;
+    padding: 5px;
+
+    bottom: 100%;
+
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-top: 1px solid;
+}
+
+/* HEADER */
+smt-chart div[header] {
+    padding: 0.25em;
+    text-align: center;
+}
+
+smt-chart div[header] h3 {
+    font-size: 1.5em;
+}
+
+/* ///  BODY /// */
+
+smt-chart[type='bar-chart'] div[body] {
+    display: grid;
+    grid-template-areas:
+        'axis_y main'
+        'axis_x axis_x';
+    grid-template-columns: 15px 1fr;
+    grid-template-rows: auto;
+
+    margin-block-start: 1rem;
+    margin-block-end: 1rem;
+
+    padding: 5px;
+}
+
+/* y axis */
+smt-chart[type='bar-chart'] div[body] div[axis='y'] {
+    grid-area: axis_y;
+
+    font-size: 13px;
+
+    width: 15px;
+
+    display: inline-grid;
+}
+
+smt-chart[type='bar-chart'] div[body] div[axis='y'] div[y-step] {
+    height: fit-content;
+    display: flex;
+    flex-flow: row;
+    align-items: start;
+    position: relative;
+}
+
+smt-chart[type='bar-chart'] div[body] div[axis='y'] div[y-step] span[text] {
+    position: absolute;
+    top: -10px;
+}
+
+smt-chart[type='bar-chart'] div[body] div[axis='y'] div[y-step] span[line] {
+    display: block;
+    width: var(--y-axis-line-width);
+    border-bottom: 1px solid #d1d1d1;
+    margin: 0 2em;
+
+    opacity: 0.4;
+    z-index: 1;
+}
+
+/* x axis */
+smt-chart[type='bar-chart'] div[body] div[axis='x'] {
+    grid-area: axis_x;
+    height: 15px;
+}
+
+/* Bars */
+smt-chart[type='bar-chart'] div[body] div[bars] {
+    grid-area: main;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1em;
+
+    width: 100%;
+    min-height: 400px;
+
+    padding: 0 1.5em;
+
+    align-items: end;
+}
+
+smt-chart[type='bar-chart'] div[body] div[bars] div[bar] {
+    height: var(--height);
+    background-color: hsl(var(--chart-color));
+    border-radius: 0.25em;
+    position: relative;
+
+    display: grid;
+    place-items: center;
+
+    min-width: 2em;
+    transition: height 10s ease-in;
+
+    animation: column-load 850ms ease-in-out;
+}
+
+@keyframes column-load {
+    from {
+        height: 0;
+    }
+    to {
+        height: var(--height);
+    }
+}
+
+smt-chart[type='bar-chart'] div[body] div[bars] div[bar]:hover {
+    background-color: hsl(var(--chart-color) / 0.8);
+}
+
+smt-chart[type='bar-chart'] div[body] div[bars] div[bar]::before,
+smt-chart[type='bar-chart'] div[body] div[bars] div[bar]::after {
+    position: absolute;
+    margin-block-start: 0.25em;
+    margin-block-end: 0.25em;
+}
+smt-chart[type='bar-chart'] div[body] div[bars] div[bar]::before {
+    content: attr(data-value);
+    bottom: 100%;
+}
+
+smt-chart[type='bar-chart'] div[body] div[bars] div[bar]::after {
+    content: attr(data-label);
+
+    font-size: 0.7em;
+    text-align: center;
+    white-space: pre;
+
+    top: 100%;
+    width: 100%;
+    height: fit-content;
+
+    overflow: hidden;
+}

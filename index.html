@@ -3,33 +3,49 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style.css" />
-        <script src="script.js"></script>
-        <title>Document</title>
+        <link rel="stylesheet" href="chart.css" />
+        <script src="chart.js"></script>
+        <title>Charts</title>
     </head>
     <body>
-        <smt-chart type="bat-chart" title="Test" steptick="1"></smt-chart>
+        <smt-chart type="bat-chart" theme="light" palette="all" steptick="1"></smt-chart>
         <script>
+            const tooltipTest = 'ליווי:5\nרס"ר:10';
             const datas = [
                 {
-                    label: 'רועי סימון ליחובצקי',
+                    label: 'Charlee Jakki',
                     value: 56,
+                    extra: {
+                        tooltip: tooltipTest,
+                    },
                 },
                 {
-                    label: 'עידן קופיט',
+                    label: 'Rachel Blanton',
                     value: 1,
+                    extra: {
+                        tooltip: '',
+                    },
                 },
                 {
-                    label: 'תומר נאמן',
+                    label: 'Bill Bush',
                     value: 10,
+                    extra: {
+                        tooltip: '',
+                    },
                 },
                 {
-                    label: "רון יוסף חיימוביץ'",
+                    label: 'Roger Henry',
                     value: 10,
+                    extra: {
+                        tooltip: '',
+                    },
                 },
                 {
-                    label: 'דניאל לנבורג',
+                    label: 'Lorelei Medina',
                     value: 15,
+                    extra: {
+                        tooltip: '',
+                    },
                 },
             ];
             const chart = document.querySelector('smt-chart');
